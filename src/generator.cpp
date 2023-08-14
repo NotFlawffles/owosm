@@ -16,6 +16,7 @@ void Generator::generate(void) {
         program.push_back(generateNext());
         current = lexer.next();
     }
+
     std::ofstream file("out", std::ios::out | std::ios::binary);
     size_t size = program.size();
     file.write((char*) &size, sizeof(size));
@@ -28,8 +29,11 @@ i16 Generator::generateNext(void) {
         case Identifier:
             return lookupTable[current.value];
 
+            break;
+
         case Integer:
             return std::stoi(current.value);
+            break;
 
         default:
             return 0;
