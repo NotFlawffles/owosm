@@ -38,7 +38,7 @@ Token Lexer::lexNumeric(void) {
     std::string value = std::string();
     ull row = this->row, column = this->column;
     
-    while (isdigit(current)) {
+    while (isdigit(current) || current == 'x' || current == 'b') {
         value.push_back(current);
         advance();
     }

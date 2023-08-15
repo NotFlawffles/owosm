@@ -29,11 +29,15 @@ u16 Generator::generateNext(void) {
         case Identifier:
             return lookupTable[current.value];
 
-            break;
-
         case Integer:
-            return std::stoi(current.value);
-            break;
+            if (current.value.rfind("0b", 0) == 0)
+                return std::stoi(current.value.substr(2), 0, 2);
+
+            else if (current.value.rfind("0x", 0) == 0)
+                return std::stoi(current.value, 0, 16);
+
+            else
+                return std::stoi(current.value, 0, 10);
 
         default:
             return 0;
