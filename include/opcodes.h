@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-typedef int16_t i16;
+typedef uint16_t u16;
 
-enum UserOpcodes : i16 {
+enum UserOpcodes : u16 {
     Swp = 0x4000,
     Swpz = 0x4500,
     Swpc = 0x4900,
@@ -72,5 +72,13 @@ enum UserOpcodes : i16 {
     Alloc = 0x4010,
     Allocz = 0x4510,
     Allocc = 0x4910,
-    Allocv = 0x4310
+    Allocv = 0x4310,
+    Str = 0x4011,
+    Strz = 0x4511,
+    Strc = 0x4911,
+    Strv = 0x4311,
+    Ld = 0x4012,
+    Ldz = 0x4512,
+    Ldc = 0x4912,
+    Ldv = 0x4312
 };

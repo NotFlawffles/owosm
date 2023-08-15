@@ -11,7 +11,7 @@ class Generator {
     Lexer lexer;
     Token current;
 
-    std::map<std::string, i16> lookupTable = {
+    std::map<std::string, u16> lookupTable = {
         {"swp", Swp},         {"swpz", Swpz},         {"swpc", Swpc},         {"swpv", Swpv},
         {"add", Add},         {"addz", Addz},         {"addc", Addc},         {"addv", Addv},
         {"sub", Sub},         {"subz", Subz},         {"subc", Subc},         {"subv", Subv},
@@ -28,10 +28,12 @@ class Generator {
         {"jump", Jump},       {"jumpz", Jumpz},       {"jumpc", Jumpc},       {"jumpv", Jumpv},
         {"pop", Pop},         {"popz", Popz},         {"popc", Popc},         {"popv", Popv},
         {"syscall", Syscall}, {"syscallz", Syscallz}, {"syscallc", Syscallc}, {"syscallv", Syscallv},
-        {"alloc", Alloc},     {"allocz", Allocz},     {"allocc", Allocc},     {"allocv", Allocv}
+        {"alloc", Alloc},     {"allocz", Allocz},     {"allocc", Allocc},     {"allocv", Allocv},
+        {"str", Str},         {"strz", Strz},         {"strc", Strc},         {"strv", Strv},
+        {"ld", Ld},           {"ldz", Ldz},           {"ldc", Ldc},           {"ldv", Ldv}
     };
 
-    i16 generateNext(void);
+    u16 generateNext(void);
 
     public:
     Generator(std::string fileName, std::string content);
