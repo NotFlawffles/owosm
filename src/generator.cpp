@@ -18,8 +18,8 @@ void Generator::generate(void) {
     }
 
     std::ofstream file("out", std::ios::out | std::ios::binary);
-    u16 size = program.size();
-    file.write((char*) &size, sizeof(size));
+    size_t size = program.size();
+    file.write((char*) &size, sizeof(size_t));
     file.write((char*) &program[0], program.size() * sizeof(u16));
     file.close();
 }

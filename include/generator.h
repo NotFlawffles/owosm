@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include "opcodes.h"
 #include "lexer.h"
@@ -11,7 +11,7 @@ class Generator {
     Lexer lexer;
     Token current;
 
-    std::map<std::string, u16> lookupTable = {
+    std::unordered_map<std::string, u16> lookupTable = {
         {"swp", Swp},         {"swpz", Swpz},         {"swpc", Swpc},         {"swpv", Swpv},
         {"add", Add},         {"addz", Addz},         {"addc", Addc},         {"addv", Addv},
         {"sub", Sub},         {"subz", Subz},         {"subc", Subc},         {"subv", Subv},
