@@ -10,6 +10,10 @@
 class Generator {
     Lexer lexer;
     Token current;
+    u16 counter = 0;
+    std::vector<u16> program;
+
+    std::unordered_map<std::string, u16> labels;
 
     std::unordered_map<std::string, u16> lookupTable = {
         {"swp", Swp},         {"swpz", Swpz},         {"swpc", Swpc},         {"swpv", Swpv},
@@ -30,10 +34,14 @@ class Generator {
         {"syscall", Syscall}, {"syscallz", Syscallz}, {"syscallc", Syscallc}, {"syscallv", Syscallv},
         {"alloc", Alloc},     {"allocz", Allocz},     {"allocc", Allocc},     {"allocv", Allocv},
         {"str", Str},         {"strz", Strz},         {"strc", Strc},         {"strv", Strv},
-        {"ld", Ld},           {"ldz", Ldz},           {"ldc", Ldc},           {"ldv", Ldv}
+        {"ld", Ld},           {"ldz", Ldz},           {"ldc", Ldc},           {"ldv", Ldv},
+        {"rev", Rev},         {"revz", Revz},         {"revc", Revc},         {"revv", Revv}
     };
 
     u16 generateNext(void);
+    u16 generateInteger(void);
+    void generateLabel(void);
+    void generateString(void);
 
     public:
     Generator(std::string fileName, std::string content);

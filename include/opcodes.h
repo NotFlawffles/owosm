@@ -80,5 +80,9 @@ enum UserOpcodes : u16 {
     Ld = 0x4012,
     Ldz = 0x4512,
     Ldc = 0x4912,
-    Ldv = 0x4312
+    Ldv = 0x4312,
+    Rev = 0x4013,
+    Revz = 0x4513,
+    Revc = 0x4913,
+    Revv = 0x4313
 };

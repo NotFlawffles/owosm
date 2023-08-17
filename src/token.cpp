@@ -4,7 +4,7 @@
 Token::Token(void) {}
 
 Token::Token(TokenType type, std::string value,
-             ull row, ull column)
+             u64 row, u64 column)
 {
     this->type = type;
     this->value = value;
@@ -12,7 +12,7 @@ Token::Token(TokenType type, std::string value,
     this->column = column;
 }
 
-Token::Token(TokenType type, ull row, ull column) {
+Token::Token(TokenType type, u64 row, u64 column) {
     this->type = type;
     this->row = row;
     this->column = column;

@@ -6,21 +6,24 @@ typedef enum {
     None,
     Identifier,
     Integer,
+    Colon,
+    String,
+    Char,
     EndOfFile
 } TokenType;
 
-typedef unsigned long long ull;
+typedef unsigned long long u64;
 
 class Token {
     public:
     TokenType type;
     std::string value;
-    ull row, column;
+    u64 row, column;
 
     Token();
     Token(TokenType type, std::string value,
-          ull row, ull column);
+          u64 row, u64 column);
 
-    Token(TokenType type, ull row, ull column);
+    Token(TokenType type, u64 row, u64 column);
     Token(TokenType type);
 };

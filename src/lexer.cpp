@@ -19,12 +19,21 @@ Token Lexer::next(void) {
     else if (isdigit(current))
         return lexNumeric();
 
+    else if (current == '"')
+        return lexString();
+
+    else if (current == '\'')
+        return lexChar();
+
+    else if (current == ':')
+        return advanceWithToken(Token(Colon, row, column));
+
     return Token(EndOfFile);
 }
 
 Token Lexer::lexIdentifier(void) {
     std::string value = std::string();
-    ull row = this->row, column = this->column;
+    u64 row = this->row, column = this->column;
     
     while (isalnum(current) || current == '_') {
         value.push_back(current);
@@ -36,7 +45,7 @@ Token Lexer::lexIdentifier(void) {
 
 Token Lexer::lexNumeric(void) {
     std::string value = std::string();
-    ull row = this->row, column = this->column;
+    u64 row = this->row, column = this->column;
     
     while (isdigit(current) || current == 'x' || current == 'b') {
         value.push_back(current);
@@ -44,6 +53,29 @@ Token Lexer::lexNumeric(void) {
     }
 
     return Token(Integer, value, row, column);
+}
+
+Token Lexer::lexString(void) {
+    std::string value = std::string();
+    u64 row = this->row, column = this->column;
+    advance();
+    
+    while (current != '"') {
+        value.push_back(current);
+        advance();
+    }
+
+    advance();
+    return Token(String, value, row, column);
+}
+
+Token Lexer::lexChar(void) {
+    u64 row = this->row, column = this->column;
+    advance();
+    char value = current;
+    advance();
+    advance();
+    return Token(Char, (std::string) {value}, row, column);
 }
 
 Token Lexer::advanceWithToken(Token token) {
