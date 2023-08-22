@@ -28,6 +28,13 @@ Token Lexer::next(void) {
     else if (current == ':')
         return advanceWithToken(Token(Colon, row, column));
 
+    else if (current == ';') {
+        while (current != '\n')
+            advance();
+
+        return next();
+    }
+
     return Token(EndOfFile);
 }
 
@@ -61,7 +68,21 @@ Token Lexer::lexString(void) {
     advance();
     
     while (current != '"') {
-        value.push_back(current);
+        if (current == '\\') {
+            advance();
+            
+            switch (current) {
+                case 'n':
+                    value.push_back('\n');
+                    break;
+
+                case 't':
+                    value.push_back('\t');
+                    break;
+            }
+        } else
+            value.push_back(current);
+
         advance();
     }
 
@@ -72,7 +93,24 @@ Token Lexer::lexString(void) {
 Token Lexer::lexChar(void) {
     u64 row = this->row, column = this->column;
     advance();
-    char value = current;
+
+    char value;
+
+    if (current == '\\') {
+        advance();
+        
+        switch (current) {
+            case 'n':
+                value = '\n';
+                break;
+
+            case 't':
+                value = '\t';
+                break;
+        }
+    } else
+        value = current;
+
     advance();
     advance();
     return Token(Char, (std::string) {value}, row, column);

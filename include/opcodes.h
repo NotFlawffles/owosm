@@ -84,5 +84,18 @@ enum UserOpcodes : u16 {
     Rev = 0x4013,
     Revz = 0x4513,
     Revc = 0x4913,
-    Revv = 0x4313
+    Revv = 0x4313,
+    Dbg = 0x4014,
+    Ret = 0x4015,
+    Retz = 0x4515,
+    Retc = 0x4915,
+    Retv = 0x4315,
+    Dup = 0x4016,
+    Dupz = 0x4516,
+    Dupc = 0x4916,
+    Dupv = 0x4316,
+    B = 0x4017,
+    Bz = 0x4517,
+    Bc = 0x4917,
+    Bv = 0x4317
 };

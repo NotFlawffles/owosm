@@ -10,18 +10,29 @@ Generator::Generator(std::string fileName, std::string content) {
 }
 
 void Generator::generate(void) {
+    preprocess();
+
     while (current.type != EndOfFile) {
-        if (current.type == Identifier && lookupTable.find(current.value) == lookupTable.end()) {
-            generateLabel();
-            continue;
-        } else if (current.type == String) {
+        if (current.type == String) {
             generateString();
             continue;
+        } else if (current.type == Identifier && lookupTable.count(current.value) == 0) {
+            std::string name = current.value;
+            current = lexer.next();
+            
+            if (current.type == Colon)
+                current = lexer.next(); 
+            
+            else
+                program.push_back(labels[name]);
+
+            continue;
         }
-        
-        program.push_back(generateNext());
+
+        else    
+            program.push_back(generateNext());
+
         current = lexer.next();
-        counter++;
     }
 
     std::ofstream file("out", std::ios::out | std::ios::binary);
@@ -58,25 +69,11 @@ u16 Generator::generateInteger(void) {
         return std::stoi(current.value, 0, 10);
 }
 
-void Generator::generateLabel(void) {
-    std::string name = current.value;
-    current = lexer.next();
-    
-    if (current.type == Colon) {
-        current = lexer.next();
-        labels.insert(std::pair<std::string, u16>(name, counter));
-    } else {
-        program.push_back(labels[name]);
-        counter++;
-    }
-}
-
 void Generator::generateString(void) {
     u16 size = current.value.size();
 
     program.push_back(size);
     program.push_back(Alloc);
-    counter += 2;
 
     for (u16 i = 0; i < size; i++) {
         program.push_back(current.value.at(i));
@@ -85,11 +82,38 @@ void Generator::generateString(void) {
         program.push_back(Pop);
         program.push_back(0x1);
         program.push_back(Add);
-        counter += 6;
     }
 
     program.push_back(size);
     program.push_back(Sub);
-    counter += 2;
     current = lexer.next();
+}
+
+void Generator::preprocess(void) {
+    Lexer lexer = this->lexer;
+    Token current = this->current;
+    u16 counter = 0;
+
+    while (current.type != EndOfFile) {
+        if (current.type == Identifier && lookupTable.count(current.value) == 0) {
+            std::string name = current.value;
+            current = lexer.next();
+
+            if (current.type == Colon) {
+                labels.insert(std::pair<std::string, u16>(name, counter));
+                current = lexer.next();
+            }
+
+            else
+                counter++;
+
+            continue;
+        } else if (current.type == String)
+            counter += 4 + 6 * current.value.size();
+
+        else
+            counter++;
+
+        current = lexer.next();
+    }
 }
