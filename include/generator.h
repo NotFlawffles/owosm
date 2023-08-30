@@ -39,7 +39,9 @@ class Generator {
         {"dup", Dup},         {"dupz", Dupz},         {"dupc", Dupc},         {"dupv", Dupv},
         {"b", B},             {"bz", Bz},             {"bc", Bc},             {"bv", Bv},
         {"set", Set},         {"setz", Setz},         {"setc", Setc},         {"setv", Setv},
-        {"get", Get},         {"getz", Getz},         {"getc", Getc},         {"getv", Getv}
+        {"get", Get},         {"getz", Getz},         {"getc", Getc},         {"getv", Getv},
+        {"inc", Inc},         {"incz", Incz},         {"incc", Incc},         {"incv", Incv},
+        {"dec", Dec},         {"decz", Decz},         {"decc", Decc},         {"decv", Decv}
     };
 
     u16 generateNext(void);
@@ -47,6 +49,7 @@ class Generator {
     void generateLabel(void);
     void generateString(void);
     void preprocess(void);
+    std::string getOutName(void);
 
     public:
     Generator(std::string fileName, std::string content);

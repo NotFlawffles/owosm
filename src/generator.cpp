@@ -35,7 +35,7 @@ void Generator::generate(void) {
         current = lexer.next();
     }
 
-    std::ofstream file("out", std::ios::out | std::ios::binary);
+    std::ofstream file(getOutName(), std::ios::out | std::ios::binary);
     size_t size = program.size();
     file.write((char*) &size, sizeof(size_t));
     file.write((char*) &program[0], program.size() * sizeof(u16));
@@ -116,4 +116,8 @@ void Generator::preprocess(void) {
 
         current = lexer.next();
     }
+}
+
+std::string Generator::getOutName(void) {
+    return lexer.fileName.substr(0, lexer.fileName.find('.'));
 }

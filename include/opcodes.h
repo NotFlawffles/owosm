@@ -17,7 +17,7 @@ enum UserOpcodes : u16 {
     Subz = 0x4502,
     Subc = 0x4902,
     Subv = 0x4302,
-    Mul = 0x4030,
+    Mul = 0x4003,
     Mulz = 0x4503,
     Mulc = 0x4903,
     Mulv = 0x4303,
@@ -101,5 +101,13 @@ enum UserOpcodes : u16 {
     Get = 0x4018,
     Getz = 0x4518,
     Getc = 0x4918,
-    Getv = 0x4318
+    Getv = 0x4318,
+    Inc = 0x4019,
+    Incz = 0x4519,
+    Incc = 0x4919,
+    Incv = 0x4319,
+    Dec = 0x401A,
+    Decz = 0x451A,
+    Decc = 0x491A,
+    Decv = 0x431A
 };
