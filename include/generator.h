@@ -34,11 +34,12 @@ class Generator {
         {"alloc", Alloc},     {"allocz", Allocz},     {"allocc", Allocc},     {"allocv", Allocv},
         {"str", Str},         {"strz", Strz},         {"strc", Strc},         {"strv", Strv},
         {"ld", Ld},           {"ldz", Ldz},           {"ldc", Ldc},           {"ldv", Ldv},
-        {"rev", Rev},         {"revz", Revz},         {"revc", Revc},         {"revv", Revv},
         {"dbg", Dbg},
         {"ret", Ret},         {"retz", Retz},         {"retc", Retc},         {"retv", Retv},
         {"dup", Dup},         {"dupz", Dupz},         {"dupc", Dupc},         {"dupv", Dupv},
-        {"b", B},             {"bz", Bz},             {"bc", Bc},             {"bv", Bv}
+        {"b", B},             {"bz", Bz},             {"bc", Bc},             {"bv", Bv},
+        {"set", Set},         {"setz", Setz},         {"setc", Setc},         {"setv", Setv},
+        {"get", Get},         {"getz", Getz},         {"getc", Getc},         {"getv", Getv}
     };
 
     u16 generateNext(void);
